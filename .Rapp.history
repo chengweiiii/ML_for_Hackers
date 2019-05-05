@@ -1,55 +1,98 @@
-head(ufo)
-getwd
+library(tm)
+library(ggplot2)
 getwd()
-setwd(/Documents/GitHub/ML_for_Hackers)
-setwd("/Documents/GitHub/ML_for_Hackers")
+library('plyr')
+data.path <- file.path("..", "03-Classification", "data")#
+easyham.path <- file.path(data.path, "easy_ham")
+data.path
+easyham.path
+easyham.path <- paste(data.path, "easy_ham/", sep="")
+easyham.path
+easyham.path <- file.path(data.path, "easy_ham")
+parse.email <- function(path){
+full.msg <- msg.full(path)
+date <- get.date(full.msg)
+from <- get.from(full.msg)
+subj <- get.subject(full.msg)
+msg <- get.msg(full.msg)
+return(c(date, from, subj, msg, path))
+}
+msg.full <- function(path){
+con <- file(path, open="rt", encoding="latin1")
+msg <- readLines(con)
+close(con)
+return(msg)
+}
+?close
 getwd()
-setwd("/Documents")
 setwd("~/Documents/GitHub/ML_for_Hackers")
 getwd()
-ufo<-read.delim("01-Introduction/data/ufo/ufo_awesome.tsv", sep"\t", stringsAsFactors=FALSE, header=FALSE, na.strings="")
-ufo<-read.delim("01-Introduction/data/ufo/ufo_awesome.tsv", sep="\t", stringsAsFactors=FALSE, header=FALSE, na.strings="")
-head(ufo)
-names(ufo) <- c("DateOccurred","DateReported","Location","ShortDescription","Duration","LongDescription")
-head(ufo)
-head(ufo[which(nchar(ufo$DateOccurred)!=8 | nchar(ufo$DateReported)!=8),1])
-good.rows<-ifelse(nchar(ufo$DateOccured)!=8 | nchar(ufo$DateReported)!=8,FALSE,TRUE)
-length(good.rows)
-good.rows<-ifelse(nchar(ufo$DateOccurred)!=8 | nchar(ufo$DateReported)!=8,FALSE,TRUE)
-length(good.rows)
-lenght(which(!good.rows))
-length(which(!good.rows))
-ufo<-ufo[good.rows,]
-ufo$DateOccurred<-as.Date(ufo$DateOccurred, format="%Y%m%d")
-ufo$DateReported<-as.Date(ufo$DateReported, format="%Y%m%d")
-head(ufo)
-?gsub
-?strsplit
-get.location <- function(l)#
+easyham.path
+get.from <- function(msg.vec){
+from <- msg.vec[grep1("From: ", msg.vec)]
+from <- strsplit(from, '[":<> ]')[[1]]
+from <- from[which(from !="" & from != " ")]
+return(from[grep1("@", from)][1])]
+get.from <- function(msg.vec)#
 {#
-  split.location <- tryCatch(strsplit(l, ",")[[1]],#
-                             error = function(e) return(c(NA, NA)))#
-  clean.location <- gsub("^ ","",split.location)#
-  if (length(clean.location) > 2)#
-  {#
-    return(c(NA,NA))#
-  }#
-  else#
-  {#
-    return(clean.location)#
-  }#
+  from <- msg.vec[grepl("From: ", msg.vec)]#
+  from <- strsplit(from, '[":<> ]')[[1]]#
+  from <- from[which(from  != "" & from != " ")]#
+  return(from[grepl("@", from)][1])#
 }
-city.state <- lapply(ufo$Location, get.location)
-head(city.state)
-head(city)
 ?strsplit
-head(ufo)
-ufo[1:15]
-ufo[1:15][1:6]
-location.matrix<-do.call(rbind, city.state)
-head(location.matrix)
-ufo<-transform(ufo, USCity=location.matrix[,1], USState=tolower(location.matrix[,2]), stringsAsFactors=FALSE)
-head(ufo)
-ufo$USState <- state.abb[match(ufo$USState, state.abb)]
-head(ufo)
-source("/Users/mbpr/Documents/test1.txt")
+x <- "From: Joe McNally <joe@flaneur.org.uk"
+get.from(x)
+strsplit(x, '<>')[[1]]
+x
+strsplit(x, '<>')
+x <- "From: Joe McNally <joe@flaneur.org.uk>"
+strsplit(x, '<>')
+strsplit(x, '[":<> ]')[[1]]
+strsplit(x, '[":<> ]')
+x.split <- strsplit(x, '[":<> ]')[[1]]
+x.split
+strsplit(x, '<')[[1]]
+strsplit(x, '<>')[[1]]
+strsplit(x, '< >')[[1]]
+x.split <- strsplit(x, '[":<> ]')[[1]]
+x.split
+x.split <- strsplit(x, '[":<> ]')
+x.split
+x.split <- strsplit(x, '[<> ]')
+x.split
+?strsplit
+x.split <- strsplit(x, '[":<> ]')
+x.split
+x.split <- strsplit(x, '[":<> ]')[[1]]
+x.split
+x.split[3]
+x.split[which(x.split !="" & x.split != " ")]
+get.msg <- function(msg.vec){
+msg <- msg.vec[seq(which(msg.vec =="")[1] + 1, length(msg.vec),1)]
+return(paste(msg, collapse="\n"))
+}
+y
+y <- c("aaa","bbb","ccc")
+y
+?crow
+y
+path
+test.con <- file("test", open="rt", encoding="latin1")
+test.con
+close(test.con)
+test.con <- file("test", open="rt", encoding="latin1")
+close(test.con)
+test.path <- getwd()
+test.path
+test.path <- "/Users/mbpr/Documents/GitHubs/ML_for_Hackers/test"
+test.path
+test.con <- file(test.path, open="rt", encoding="latin1")
+test.path <- "/Users/mbpr/Documents/GitHub/ML_for_Hackers/test"
+test.con <- file(test.path, open="rt", encoding="latin1")
+test.con
+test.msg <- readLines(test.con)
+test.msg
+?seq()
+seq(1,5,0.5)
+close(test.con)

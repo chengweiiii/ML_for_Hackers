@@ -323,7 +323,7 @@ msg.weights <- data.frame(list(Term = names(msg.terms),
 msg.weights <- subset(msg.weights, Weight > 0)
 
 # This function uses our pre-calculated weight data frames to look up
-# the appropriate weightt for a given search.term.  We use the 'term'
+# the appropriate weight for a given search.term.  We use the 'term'
 # parameter to dertermine if we are looking up a word in the weight.df
 # for it message body weighting, or for its subject line weighting.
 get.weights <- function(search.term, weight.df, term = TRUE)
