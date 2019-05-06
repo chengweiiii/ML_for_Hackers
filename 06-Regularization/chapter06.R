@@ -391,6 +391,7 @@ library('tm')
 
 documents <- data.frame(Text = ranks$Long.Desc.)
 row.names(documents) <- 1:nrow(documents)
+#documents <- data.frame(doc_id = ranks$IP_Family,text = ranks$Long.Desc.)
 
 corpus <- Corpus(DataframeSource(documents))
 corpus <- tm_map(corpus, tolower)
